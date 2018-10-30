@@ -33,7 +33,7 @@ Runtime configuration can be provided using environment variables:
 This image enforces password policies for ldap users to include password ageing and failures. There are two policies added in this image -
 
 * **default** : Default policy is applied to all the accounts which haven't got _pwdPolicySubentry_ operational attribute. 
-* **service-users** : This policy is applied to service accounts like jenkins, gerrit and nexus.
+* **service-users** : This policy is applied to service accounts like Jenkins, GitLab and Nexus.
 
 **Note** : Password policies also include the password complexity using password checker module and following rules are applied -
 

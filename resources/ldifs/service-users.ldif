@@ -5,7 +5,7 @@ changetype: modify
 add: pwdPolicySubentry
 pwdPolicySubentry: cn=service-users,ou=policies,${SLAPD_FULL_DOMAIN}
 
-dn: cn=gerrit,ou=people,${SLAPD_FULL_DOMAIN}
+dn: cn=gitlab,ou=people,${SLAPD_FULL_DOMAIN}
 changetype: modify
 add: pwdPolicySubentry
 pwdPolicySubentry: cn=service-users,ou=policies,${SLAPD_FULL_DOMAIN}
