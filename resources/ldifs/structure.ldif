@@ -5,18 +5,18 @@ objectClass: organizationalUnit
 objectClass: top
 ou: people
 
-dn: cn=gerrit,ou=people,${SLAPD_FULL_DOMAIN}
+dn: cn=gitlab,ou=people,${SLAPD_FULL_DOMAIN}
 objectClass: inetOrgPerson
 objectClass: organizationalPerson
 objectClass: person
 objectClass: top
-cn: gerrit
-displayName: gerrit
-givenName: gerrit
-mail: gerrit@${SLAPD_DOMAIN}
-sn: gerrit
-uid: gerrit
-userPassword:: ${GERRIT_PASSWORD}
+cn: gitlab
+displayName: gitlab
+givenName: gitlab
+mail: gitlab@${SLAPD_DOMAIN}
+sn: gitlab
+uid: gitlab
+userPassword:: ${GITLAB_PASSWORD}
 
 dn: cn=jenkins,ou=people,${SLAPD_FULL_DOMAIN}
 objectClass: inetOrgPerson
