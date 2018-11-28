@@ -1,10 +1,10 @@
-FROM dinkel/openldap:2.4.40
+FROM dinkel/openldap:latest
 
 MAINTAINER Darren Jackson, <darren.a.jackson>
 
 # Replicate all default environment variables from the base image and customize the needed one's. 
 # This is to be able to use a custom entrypoint and perform all needed settings
-
+ENV VVERSION=2.4.44
 ENV INITIAL_ADMIN_USER admin.user
 ENV INITIAL_ADMIN_PASSWORD="" GITLAB_PASSWORD="" JENKINS_PASSWORD=""
 ENV SLAPD_PASSWORD=""
@@ -38,10 +38,10 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y ldap-utils wget gcc make libdb
 apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Get openldap source to compile check password
-RUN wget -O /root/openldap-2.4.40.tgz https://www.openldap.org/software/download/OpenLDAP/openldap-release/openldap-2.4.40.tgz && \
+RUN wget -O /root/openldap-$VVERSION.tgz https://www.openldap.org/software/download/OpenLDAP/openldap-release/openldap-$VVERSION.tgz && \
 	cd /root && \
-	tar -zxvf openldap-2.4.40.tgz &&  \
-	cd openldap-2.4.40 && ./configure && \
+	tar -zxvf openldap-$VVERSION.tgz &&  \
+	cd openldap-$VVERSION && ./configure && \
 	make depend
 
 RUN wget -O /root/cracklib-2.9.6.tar.gz https://github.com/cracklib/cracklib/releases/download/cracklib-2.9.6/cracklib-2.9.6.tar.gz && \
@@ -58,7 +58,7 @@ RUN wget -O /root/cracklib-words-2.9.6.gz https://github.com/cracklib/cracklib/r
 RUN wget -O /root/openldap-ppolicy-check-password-1.1.tar.gz https://github.com/ltb-project/openldap-ppolicy-check-password/archive/v1.1.tar.gz && \
 	cd /root && gunzip openldap-ppolicy-check-password-1.1.tar.gz && tar -xvf openldap-ppolicy-check-password-1.1.tar && \
 	cd openldap-ppolicy-check-password-1.1 && \
-	make install  CONFIG="/etc/ldap/check_password.conf" LDAP_INC="-I/root/openldap-2.4.40/include/ -I/root/openldap-2.4.40/servers/slapd" \
+	make install  CONFIG="/etc/ldap/check_password.conf" LDAP_INC="-I/root/openldap-2.4.40/include/ -I/root/openldap-$VVERSION/servers/slapd" \
 	CRACKLIB="/lib/cracklib/" CRACKLIB_LIB="/usr/lib/libcrack.so.2" LIBDIR="/usr/lib/ldap/"
 
 # Cleanup
