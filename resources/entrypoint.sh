@@ -5,7 +5,7 @@
 
 # When not limiting the open file descritors limit, the memory consumption of
 # slapd is absurdly high. See https://github.com/docker/docker/issues/8231
-ulimit -n 8192
+sudo ulimit -n 8192
 
 
 set -e
